@@ -33,8 +33,10 @@ class EasyABC extends Component {
     let wordSound = document.querySelector(`audio[data-key="word"]`);
 
     if (this.state.currentTick === 0) {
+      letterSound.currentTime = 0;
       letterSound.play();
     } else {
+      wordSound.currentTime = 0;
       wordSound.play();
     }
   }
