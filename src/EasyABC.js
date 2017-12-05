@@ -18,19 +18,36 @@ class EasyABC extends Component {
 
   prev() {
     console.log("prev button clicked");
-    if (this.state.currentTick < 2) {
-      this.setState({ currentTick: this.state.currentTick - 1 });
-    } else {
+    if (this.state.currentPosition > 0) {
       this.setState({ currentPosition: this.state.currentPosition - 1 });
+    } else {
+      this.setState({ currentPosition: this.state.alphabets.length - 1 });
     }
   }
 
   next() {
-    console.log("next button clicked");
-    if (this.state.currentTick < 2) {
-      this.setState({ currentTick: this.state.currentTick + 1 });
+    console.log(
+      "next button clicked",
+      "this.state.currentPosition",
+      this.state.currentPosition,
+      "this.state.currentTick",
+      this.state.currentTick
+    );
+    if (this.state.currentPosition === this.state.alphabets.length - 1) {
+      if (this.state.currentTick < 2) {
+        this.setState({ currentTick: this.state.currentTick + 1 });
+      } else {
+        this.setState({ currentPosition: 0, currentTick: 0 });
+      }
     } else {
-      this.setState({ currentPosition: this.state.currentPosition + 1 });
+      if (this.state.currentTick < 2) {
+        this.setState({ currentTick: this.state.currentTick + 1 });
+      } else {
+        this.setState({
+          currentPosition: this.state.currentPosition + 1,
+          currentTick: 0
+        });
+      }
     }
   }
 
@@ -51,6 +68,8 @@ class EasyABC extends Component {
               {this.state.alphabets[this.state.currentPosition].letter}
             </div>
           </div>
+          currentPosition: {this.state.currentPosition}
+          currentTick: {this.state.currentTick}
           <div className="buttons">
             <button className="button previous" onClick={this.prev}>
               Previous
